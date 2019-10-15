@@ -115,7 +115,7 @@ def create_box_encoder(model_filename, input_name="images",
     return encoder
 
 
-def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
+def generate_detections(encoder, yt_dir, csv_dir, output_dir, detection_dir=None):
     """Generate detections with features.
 
     Parameters
@@ -124,17 +124,24 @@ def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
         The encoder function takes as input a BGR color image and a matrix of
         bounding boxes in format `(x, y, w, h)` and returns a matrix of
         corresponding feature vectors.
-    mot_dir : str
-        Path to the MOTChallenge directory (can be either train or test).
+    yt_dir
+        Path to the youtube_faces directory (can be either train or test).
+    csv_dir
+        Path to the youtube_faces csv bbox directory (can be either train or test)
     output_dir
         Path to the output directory. Will be created if it does not exist.
     detection_dir
         Path to custom detections. The directory structure should be the default
         MOTChallenge structure: `[sequence]/det/det.txt`. If None, uses the
         standard MOTChallenge detections.
+
     """
+    # yt_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/Test_dataset/"
+    # csv_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/test_output_csv/"
+
+
     if detection_dir is None:
-        detection_dir = mot_dir
+        detection_dir = csv_dir
     try:
         os.makedirs(output_dir)
     except OSError as exception:
@@ -144,14 +151,22 @@ def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
             raise ValueError(
                 "Failed to created output directory '%s'" % output_dir)
 
-    for sequence in os.listdir(mot_dir):
-        print("Processing %s" % sequence)
-        sequence_dir = os.path.join(mot_dir, sequence)
 
-        image_dir = os.path.join(sequence_dir, "img1")
-        image_filenames = {
-            int(os.path.splitext(f)[0]): os.path.join(image_dir, f)
-            for f in os.listdir(image_dir)}
+    files = []
+    for f in sorted(os.listdir(csv_dir)):
+        domain = os.path.abspath(csv_dir)
+        f = os.path.join(domain,f)
+        files += [f]
+        for line in open(f, "r"):
+            data = line.split(",")
+            filename = data[0]
+            im_filename = os.path.join(yt_dir,filename)
+            print(im_filename)
+
+        for filename_txt in os.listdir(csv_dir):
+            detection_file = os.path.join(csv_dir, filename_txt):
+
+        
 
         detection_file = os.path.join(
             detection_dir, sequence, "det/det.txt")
@@ -189,7 +204,10 @@ def parse_args():
         default="resources/networks/mars-small128.pb",
         help="Path to freezed inference graph protobuf.")
     parser.add_argument(
-        "--mot_dir", help="Path to MOTChallenge directory (train or test)",
+        "--yt_dir", help="Path to MOTChallenge directory (train or test)",
+        required=True)
+    parser.add_argument(
+        "--csv_dir", help="Path to the csv bbox directory (train or test)",
         required=True)
     parser.add_argument(
         "--detection_dir", help="Path to custom detections. Defaults to "
@@ -204,7 +222,7 @@ def parse_args():
 def main():
     args = parse_args()
     encoder = create_box_encoder(args.model, batch_size=32)
-    generate_detections(encoder, args.mot_dir, args.output_dir,
+    generate_detections(encoder, args.yt_dir, args.csv_dir, args.output_dir,
                         args.detection_dir)
 
 

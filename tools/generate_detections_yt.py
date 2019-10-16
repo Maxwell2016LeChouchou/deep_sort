@@ -164,15 +164,10 @@ def generate_detections(encoder, yt_dir, csv_dir, output_dir, detection_dir=None
             print(im_filename)
 
         for filename_txt in os.listdir(csv_dir):
-            detection_file = os.path.join(csv_dir, filename_txt):
-
+            detection_file = os.path.join(csv_dir, filename_txt)
         
-
-        detection_file = os.path.join(
-            detection_dir, sequence, "det/det.txt")
         detections_in = np.loadtxt(detection_file, delimiter=',')
         detections_out = []
-
         frame_indices = detections_in[:, 0].astype(np.int)
         min_frame_idx = frame_indices.astype(np.int).min()
         max_frame_idx = frame_indices.astype(np.int).max()

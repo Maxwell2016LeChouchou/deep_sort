@@ -29,12 +29,12 @@ for f in sorted(os.listdir(bbox_dir)):
         data = line.split(",")
         filename = data[0]
         im_filename = os.path.join(yt_dir,filename)
-        #print(im_filename)
+        print(im_filename)
     
 
 for filename_txt in os.listdir(bbox_dir):
     detection_file = os.path.join(bbox_dir, filename_txt)
-    print(detection_file)
+    #print(detection_file)
 
 
 

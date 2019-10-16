@@ -183,11 +183,11 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Freeze old model")
     parser.add_argument(
         "--checkpoint_in",
-        default="resources/networks/mars-small128.ckpt-68577",
+        default="/home/max/Downloads/MTCNN/models/research/object_detection/models/ckpt_ssd_rcnn_inception_v2_coco_youtubefaces_v6/model.ckpt-200000",
         help="Path to checkpoint file")
     parser.add_argument(
         "--graphdef_out",
-        default="resources/networks/mars-small128.pb")
+        default="/home/max/Downloads/deep_sort/ckpt_pb/yt_faces_ssd.pb")
     return parser.parse_args()
 
 

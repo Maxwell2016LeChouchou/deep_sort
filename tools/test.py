@@ -17,24 +17,24 @@ import csv
 #     print(image_filenames)
 
 
-yt_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/Test_dataset/"
-bbox_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/test_csv_bbox/"
+# yt_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/Test_dataset/"
+# bbox_dir = "/home/max/Downloads/cosine_metric_learning-master/datasets/Youtube_faces/test_csv_bbox/"
 
-files = []
-for f in sorted(os.listdir(bbox_dir)):
-    domain = os.path.abspath(bbox_dir)
-    f = os.path.join(domain,f)
-    files += [f]
-    for line in open(f, "r"):
-        data = line.split(",")
-        filename = data[0]
-        im_filename = os.path.join(yt_dir,filename)
-        print(im_filename)
+# files = []
+# for f in sorted(os.listdir(bbox_dir)):
+#     domain = os.path.abspath(bbox_dir)
+#     f = os.path.join(domain,f)
+#     files += [f]
+#     for line in open(f, "r"):
+#         data = line.split(",")
+#         filename = data[0]
+#         im_filename = os.path.join(yt_dir,filename)
+#         print(im_filename)
     
 
-for filename_txt in os.listdir(bbox_dir):
-    detection_file = os.path.join(bbox_dir, filename_txt)
-    #print(detection_file)
+# for filename_txt in os.listdir(bbox_dir):
+#     detection_file = os.path.join(bbox_dir, filename_txt)
+#     #print(detection_file)
 
 
 
@@ -86,5 +86,38 @@ for filename_txt in os.listdir(bbox_dir):
 # if __name__ == "__main__":
 #     main()
 
+
+def delete_extra(input_dir, output_dir):
+    array_dic = []
+    for line in open(input_dir, 'r'):
+        data = line.split(",")
+        data[-1] = -1
+        filename_ext = data[0]
+        filename = os.path.splitext(filename_ext)[0]
+        filename_data = filename.split("/")
+        filename_id = filename_data[2]
+        total_len = len(data)
+        #print(total_len)
+        #print(filename_id)
+        array_dic.append(np.array([filename_id, data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]]))   
+    a = np.array(array_dic)
+    print(a) 
+    np.savetxt(output_dir, a, fmt="%s,%s,%s,%s,%s,%s,%s,%s,%s,%s")
+    #print(output_dir)
         
+
+def main():
+    input_path = '/home/maxwell/Downloads/deep_sort/dataset/test_csv/'
+    output_path = '/home/maxwell/Downloads/deep_sort/dataset/test_output_csv/'
+
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    for filename in os.listdir(input_path):
+        if os.path.isfile(os.path.join(input_path, filename)):
+            delete_extra(input_path+filename, output_path+filename)
+
+if __name__ == "__main__":
+    main()
+
+
     

@@ -1,0 +1,4 @@
+python3 tools/generate_detections.py \
+    --model=/home/maxwell/Downloads/deep_sort/dataset/frozen_inference_graph.pb \
+    --mot_dir=/home/maxwell/Downloads/deep_sort/dataset/test \
+    --output_dir=/home/maxwell/Downloads/deep_sort/dataset/output_dir

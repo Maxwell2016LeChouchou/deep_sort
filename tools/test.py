@@ -121,13 +121,20 @@ import csv
 
 
 
-csv_dir = '/home/max/Downloads/cosine_metric_learning/datasets/test_csv'
-for filename in os.listdir(csv_dir):
-    for line in open(os.path.join(csv_dir,filename), "r"):
-        data = line.split(",")
-        filename = data[0]
-        filename_base, ext = os.path.splitext(filename)
-        person_name, dir_file, frame_idx = filename_base.split("/")
-        print(person_name)
-        print(dir_file)
-        print(frame_idx)
+# csv_dir = '/home/max/Downloads/cosine_metric_learning/datasets/test_csv'
+# for filename in os.listdir(csv_dir):
+#     for line in open(os.path.join(csv_dir,filename), "r"):
+#         data = line.split(",")
+#         filename = data[0]
+#         filename_base, ext = os.path.splitext(filename)
+#         person_name, dir_file, frame_idx = filename_base.split("/")
+#         print(person_name)
+#         print(dir_file)
+#         print(frame_idx)
+ 
+
+PATH_TO_TEST_IMAGES_DIR = "/home/max/Downloads/MTCNN/models/research/object_detection/samples/data/lfpw_testImage/"
+#TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 3) ]
+for image_file in sorted(os.listdir(PATH_TO_TEST_IMAGES_DIR)):
+    images = os.path.join(PATH_TO_TEST_IMAGES_DIR, image_file)
+    print(images)

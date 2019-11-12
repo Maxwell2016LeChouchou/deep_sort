@@ -183,7 +183,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Freeze old model")
     parser.add_argument(
         "--checkpoint_in",
-        default="/home/max/Downloads/MTCNN/models/research/object_detection/models/ckpt_ssd_rcnn_inception_v2_coco_youtubefaces_v6/model.ckpt-200000",
+        default="/home/max/Downloads/files_for_tensorflow_models/models/ckpt_data_ssd_inception_v2_coco/model.ckpt-200000",
         help="Path to checkpoint file")
     parser.add_argument(
         "--graphdef_out",

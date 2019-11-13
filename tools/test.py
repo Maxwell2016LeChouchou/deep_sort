@@ -121,6 +121,7 @@ import csv
 
 
 
+<<<<<<< HEAD
 # csv_dir = '/home/max/Downloads/cosine_metric_learning/datasets/test_csv'
 # for filename in os.listdir(csv_dir):
 #     for line in open(os.path.join(csv_dir,filename), "r"):
@@ -138,3 +139,26 @@ PATH_TO_TEST_IMAGES_DIR = "/home/max/Downloads/MTCNN/models/research/object_dete
 for image_file in sorted(os.listdir(PATH_TO_TEST_IMAGES_DIR)):
     images = os.path.join(PATH_TO_TEST_IMAGES_DIR, image_file)
     print(images)
+=======
+csv_dir = '/home/maxwell/Downloads/cosine_metric_learning/datasets/test_csv'
+for filename in os.listdir(csv_dir):
+    for line in open(os.path.join(csv_dir,filename), "r"):
+        data = line.split(",")
+        filename = data[0]
+        filename_base, ext = os.path.splitext(filename)
+        person_name, dir_file, frame_idx = filename_base.split("/")
+    print(filename)
+    # print(person_name)
+    # print(dir_file)
+    # print(frame_idx)
+
+# image_path = '/home/maxwell/Downloads/cosine_metric_learning/datasets/test_dataset'
+
+# image_list = []
+# yt_person_name = []
+# yt_dir_list = []
+
+# for home, dirs, files in os.walk(image_path):
+#     for filename in files:
+#         meta_data =
+>>>>>>> e60a47029caae74741ea67e5381a516517e61061

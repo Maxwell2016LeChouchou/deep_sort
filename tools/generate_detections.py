@@ -67,7 +67,6 @@ def extract_image_patch(image, bbox, patch_shape):
     image = cv2.resize(image, tuple(patch_shape[::-1]))
     return image
 
-
 class ImageEncoder(object):
 
     def __init__(self, checkpoint_filename, input_name="images",

@@ -8,7 +8,7 @@ def _batch_norm_fn(x, scope=None):
     if scope is None:
         scope = tf.get_variable_scope().name + "/bn"
     return slim.batch_norm(x, scope=scope)
-
+    
 
 def create_link(
         incoming, network_builder, scope, nonlinearity=tf.nn.elu,

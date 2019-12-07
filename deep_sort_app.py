@@ -159,7 +159,7 @@ def run(sequence_dir, detection_file, output_file, min_confidence,
     """
     seq_info = gather_sequence_info(sequence_dir, detection_file)
     metric = nn_matching.NearestNeighborDistanceMetric(
-        "cosine", max_cosine_distance, nn_budget)
+        "cosine", max_cosine_distance, nn_budget)   #Here they set lamda as zero
     tracker = Tracker(metric)
     results = []
 

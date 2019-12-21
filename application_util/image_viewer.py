@@ -12,7 +12,7 @@ def is_in_bounds(mat, roi):
 
     Parameters
     ----------
-    mat : ndarray
+[[mm]]    mat : ndarray
         An ndarray of ndim>=2.
     roi : (int, int, int, int)
         Region of interest (x, y, width, height) where (x, y) is the top-left
